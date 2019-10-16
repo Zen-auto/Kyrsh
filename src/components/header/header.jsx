@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './header.scss';
 import ToCartBtn from './to-cart-btn';
-import GoodsList from '../goods-container';
 import { Link } from 'react-router-dom';
 
 export default class Header extends Component {

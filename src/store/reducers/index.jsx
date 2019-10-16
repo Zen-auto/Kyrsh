@@ -102,49 +102,49 @@ const initialState = {
         price: 200,
         description: 'descr',
         image: 'https://c.dns-shop.ru/thumb/st4/fit/320/250/027707a1e1179a7be59792ef5b046234/3c39ed0f744d77e61eec7e55fd850655793796428f987617c34eef8e9ef927d4.jpg'
+      },
+      {
+        id: 'pc_2',
+        title: 'ПК DEXP Aquilon O188',
+        price: 300,
+        description: 'descr',
+        image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/006f7a3f3fc12e2f9d8f4c4c9da27e7a/b6deee264480cba3ad4a099290ea5bb8de05dd51438d7ccfc68d977e6c720ee0.jpg'
+      },
+      {
+        id: 'pc_3',
+        title: 'ПК DEXP Jupiter P200',
+        price: 100,
+        description: 'descr',
+        image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/a7bfe392664541366c858f8c85d9ae10/2b3d80994e5be6d58253c94b9ea39b6c36ba1fed5ee4baf8b5a61b73ce36a2b6.jpg'
+      },
+      {
+        id: 'pc_4',
+        title: 'ПК HP Pavilion Gaming 690-0029ur 5XQ49EA',
+        price: 150,
+        description: 'descr',
+        image: 'https://c.dns-shop.ru/thumb/st4/fit/320/250/b42dc9211840ca5a780e87a508e80a56/306403c82c78f98fdd3499e843ab57b533b69c729f4c0ab6db18db6a3c780e03.jpg'
+      },
+      {
+        id: 'pc_5',
+        title: 'ПК Lenovo 310S-08IGM [90HX003JRS]',
+        price: 151,
+        description: 'descr',
+        image: 'https://c.dns-shop.ru/thumb/st4/fit/320/250/35901b20d832cf21371efb265dc8e2d6/3ea01a9c422a63c8cd838092f8045f6a1d528c4020a6357774ecb521abe53f50.jpg'
+      },
+      {
+        id: 'pc_6',
+        title: 'ПК HP Pavilion 590-p0038ur [4DW08EA]',
+        price: 156,
+        description: 'descr',
+        image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/f413f5eaf96a556f6796129cf859fc81/74a2b5b61fb02ef3d7f088380c4db60c4ce473d6502189f1f2e1bc41579de5cd.jpg'
+      },
+      {
+        id: 'pc_7',
+        title: 'ПК Lenovo IdeaCentre 720-18ASU [90H1005BRS]',
+        price: 189,
+        description: 'descr',
+        image: 'https://c.dns-shop.ru/thumb/st4/fit/320/250/5b4b50288b604ad43f34009cb44512f3/4d7e6c60ab8eb773939e184fc5b909ae9b6a8201d3ddd561f1ef7ce44aab776c.jpg'
       }
-      // {
-      //   id: 'pc_2',
-      //   title: 'ПК DEXP Aquilon O188',
-      //   price: 300,
-      //   description: 'descr',
-      //   image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/006f7a3f3fc12e2f9d8f4c4c9da27e7a/b6deee264480cba3ad4a099290ea5bb8de05dd51438d7ccfc68d977e6c720ee0.jpg'
-      // },
-      // {
-      //   id: 'pc_3',
-      //   title: 'ПК DEXP Jupiter P200',
-      //   price: 100,
-      //   description: 'descr',
-      //   image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/a7bfe392664541366c858f8c85d9ae10/2b3d80994e5be6d58253c94b9ea39b6c36ba1fed5ee4baf8b5a61b73ce36a2b6.jpg'
-      // },
-      // {
-      //   id: 'pc_4',
-      //   title: 'ПК HP Pavilion Gaming 690-0029ur 5XQ49EA',
-      //   price: 150,
-      //   description: 'descr',
-      //   image: 'https://c.dns-shop.ru/thumb/st4/fit/320/250/b42dc9211840ca5a780e87a508e80a56/306403c82c78f98fdd3499e843ab57b533b69c729f4c0ab6db18db6a3c780e03.jpg'
-      // },
-      // {
-      //   id: 'pc_5',
-      //   title: 'ПК Lenovo 310S-08IGM [90HX003JRS]',
-      //   price: 151,
-      //   description: 'descr',
-      //   image: 'https://c.dns-shop.ru/thumb/st4/fit/320/250/35901b20d832cf21371efb265dc8e2d6/3ea01a9c422a63c8cd838092f8045f6a1d528c4020a6357774ecb521abe53f50.jpg'
-      // },
-      // {
-      //   id: 'pc_6',
-      //   title: 'ПК HP Pavilion 590-p0038ur [4DW08EA]',
-      //   price: 156,
-      //   description: 'descr',
-      //   image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/f413f5eaf96a556f6796129cf859fc81/74a2b5b61fb02ef3d7f088380c4db60c4ce473d6502189f1f2e1bc41579de5cd.jpg'
-      // },
-      // {
-      //   id: 'pc_7',
-      //   title: 'ПК Lenovo IdeaCentre 720-18ASU [90H1005BRS]',
-      //   price: 189,
-      //   description: 'descr',
-      //   image: 'https://c.dns-shop.ru/thumb/st4/fit/320/250/5b4b50288b604ad43f34009cb44512f3/4d7e6c60ab8eb773939e184fc5b909ae9b6a8201d3ddd561f1ef7ce44aab776c.jpg'
-      // }
     ],
     tv: [
       {

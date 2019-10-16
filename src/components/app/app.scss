@@ -1,4 +1,5 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins';
 
 html,
 body {
@@ -22,13 +23,14 @@ main {
     flex: 1 0 auto;
 }
 .container {
-    width: 1100px;
+    width: 1200px;
     margin: 0 auto;
 }
 
 .main-content {
     margin-top: 20px;
     margin-bottom: 20px;
+    @include clearfix();
 }
 
 img {

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './to-cart-btn.scss';
-import GoodsList from "../../goods-container/goods-container";
 import {connect} from "react-redux";
 
 class ToCartBtn extends Component {

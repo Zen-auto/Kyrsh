@@ -26,19 +26,21 @@ export default class Good extends Component {
     return (
       <div className="good">
 
-        <a href="#" className="good__image-container">
+        <a href="#" className="good__image-container" title={ title }>
           <img className="good__image" src={ image } alt={ title } />
         </a>
-        <div className="good__descr">
-          <a href="#" className="good__title">{ title }</a>
-        </div>
-        <div className="good__actions">
-          <div className="good__price">$ { price }</div>
-          <button
-            className={ buyBtn.class }
-            onClick={ () => this.togglePuttingToCart() }>
-            { buyBtn.text }
-          </button>
+        <div className="good__footer">
+          <div className="good__descr">
+            <a href="#" className="good__title" title={ title }>{ title }</a>
+          </div>
+          <div className="good__actions">
+            <div className="good__price">$ { price }</div>
+            <button
+              className={ buyBtn.class }
+              onClick={ () => this.togglePuttingToCart() }>
+              { buyBtn.text }
+            </button>
+          </div>
         </div>
       </div>
     )

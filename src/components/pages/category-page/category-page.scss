@@ -1,0 +1,18 @@
+.goods-container {
+    width: calc(100% - 300px - 20px);
+    float: right;
+}
+
+.goods-container__top {
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+.goods-container__title {
+    margin: 0;
+}
+.goods-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1;
+}
