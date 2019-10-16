@@ -1,0 +1,73 @@
+@import '../../styles/variables.scss';
+
+html,
+body {
+    height: 100%;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    color: $text-color;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.footer {
+    flex: 0 0 auto;
+}
+main {
+    flex: 1 0 auto;
+}
+.container {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.main-content {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+img {
+    max-width: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+.btn {
+    background-color: #027DB8;
+    color: #fff;
+    border: 2px solid #027DB8;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 15px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: lighten(#027DB8, 7%);
+        border-color: lighten(#027DB8, 7%);
+        transition: background-color 0.2s ease-out;
+    }
+}
+.btn-light {
+    background-color: #fff;
+    color: #027DB8;
+    border: 2px solid #027DB8;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.footer {
+    height: 120px;
+    background-color: #3e6994;
+}

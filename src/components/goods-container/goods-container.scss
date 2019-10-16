@@ -1,0 +1,11 @@
+.goods-container {
+    float: right;
+    margin-left: 20px;
+    width: calc(100% - 300px - 20px);
+}
+.goods-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1;
+
+}
