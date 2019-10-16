@@ -8,36 +8,65 @@ import Sidebar from '../sidebar'
 import CategoriesList from '../categories-list'
 import CategoryPage from '../pages/category-page';
 
+import { withGoodstoreService } from '../hoc';
+import { goodsLoaded } from '../../store/actions';
+
 class App extends Component {
 
+  state = {
+    isMounted: false
+  };
+
+  componentDidMount() {
+    // receive data
+    const { goodstoreService } = this.props;
+    const data = goodstoreService.getGoods();
+
+    // dispatch action to Store
+    this.props.goodsLoaded(data);
+
+    this.setState(state => {
+      return {
+        isMounted: true
+      }
+    });
+  }
+
   render() {
+
     const { goodsList } = this.props;
+    const { isMounted } = this.state;
 
     return (
       <div className="wrapper">
         <Header />
         <main>
           <div className="container">
-            <Switch>
 
-              <Route path="/" exact={ true }
-                     component={ CategoriesList } />
+            { isMounted &&
 
-              <Route path="/pc" exact={ true }
-                     render={() => <CategoryPage goodList={ goodsList.pc } title="PC"/>} />
+              <Switch>
 
-              <Route path="/tablets" exact={ true }
-                     render={() => <CategoryPage goodList={ goodsList.tablets } title="Tablets"/>} />
+                <Route path="/" exact={true}
+                       component={CategoriesList}/>
 
-              <Route path="/phones" exact={ true }
-                     render={() => <CategoryPage goodList={ goodsList.phones } title="Phones"/>} />
+                <Route path="/pc"
+                       render={() => <CategoryPage goodList={goodsList.pc} title="PC"/>}/>
 
-              <Route path="/tv" exact={ true }
-                     render={() => <CategoryPage goodList={ goodsList.tv } title="TV"/>} />
+                <Route path="/tablets"
+                       render={() => <CategoryPage goodList={goodsList.tablets} title="Tablets"/>}/>
 
-              <Route render={() => <h2>Page not found</h2>} />
+                <Route path="/phones"
+                       render={() => <CategoryPage goodList={goodsList.phones} title="Phones"/>}/>
 
-            </Switch>
+                <Route path="/tv"
+                       render={() => <CategoryPage goodList={goodsList.tv} title="TV"/>}/>
+
+                <Route render={() => <h2>Page not found</h2>}/>
+
+              </Switch>
+
+            }
 
           </div>
         </main>
@@ -58,4 +87,8 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = {
+  goodsLoaded
+};
+
+export default withGoodstoreService()(connect(mapStateToProps, mapDispatchToProps)(App));
