@@ -10,6 +10,7 @@ import CategoryPage from '../pages/category-page';
 
 import { withGoodstoreService } from '../hoc';
 import { goodsLoaded } from '../../store/actions';
+import { compose } from "../../utils/compose";
 
 class App extends Component {
 
@@ -25,10 +26,8 @@ class App extends Component {
     // dispatch action to Store
     this.props.goodsLoaded(data);
 
-    this.setState(state => {
-      return {
-        isMounted: true
-      }
+    this.setState({
+      isMounted: true
     });
   }
 
@@ -91,4 +90,8 @@ const mapDispatchToProps = {
   goodsLoaded
 };
 
-export default withGoodstoreService()(connect(mapStateToProps, mapDispatchToProps)(App));
+export default compose(
+  withGoodstoreService(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(App);
+

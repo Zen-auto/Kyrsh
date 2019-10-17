@@ -9,6 +9,7 @@
 .sidebar-menu__item {
     display: block;
     border-bottom: 1px solid #bdbdbd;
+    font-weight: bold;
     color: $text-color;
     text-decoration: none;
     cursor: pointer;
@@ -18,7 +19,15 @@
         border-bottom: none;
     }
     &:hover {
-        background-color: lightgray;
+        background-color: #3e6994;
+        color: #fff;
         transition: all 0.2s ease-out;
+    }
+
+    &--active {
+        background-color: #3e6994;
+        border-color: #3e6994;
+        border-bottom: 1px solid #bdbdbd;
+        color: #fff;
     }
 }

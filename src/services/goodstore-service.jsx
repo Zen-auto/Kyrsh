@@ -56,42 +56,49 @@ export default class GoodstoreService {
       ],
       phones: [
         {
+          id: 'phone_1',
           title: '5" Смартфон DEXP B450 8 ГБ золотистый',
           price: 200,
           description: 'descr',
           image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/369e1a1856c8b89c842ecc903e075598/220fdd343732b411f838ef206cfd0b95f50579968f4a22b9204163bf5677b02c.jpg'
         },
         {
+          id: 'phone_2',
           title: '5.5" Смартфон Apple iPhone 7 Plus "Как новый" 256 ГБ черный',
           price: 300,
           description: 'descr',
           image: 'https://c.dns-shop.ru/thumb/st4/fit/320/250/aebf754b707ac74066dbcecd011b993e/67a356e63a83c53ff503dd9125fd726dbf49461a8243e3a78ec14027a0d3214e.jpg'
         },
         {
+          id: 'phone_3',
           title: '6.5" Смартфон Honor 8X Premium 128 ГБ синий',
           price: 100,
           description: 'descr',
           image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/cecc5dd7d0e17aa956295f9e421b8575/88c6d12ad9f9cc564f9e26d5c1f9cd63c4d0d95289b8b32aac8ec9e7f2f8fe62.jpg'
         },
         {
+          id: 'phone_4',
           title: '6.2" Смартфон Tecno Camon 11 16 ГБ синий',
           price: 150,
           description: 'descr',
           image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/44280197c769252673a2ce70844cbf17/e01d063ed7a0349dfe8a75077051045606a57f93a48941e1c85bdfa8d17c8478.jpg'
         },
         {
+          id: 'phone_5',
           title: '5.84" Смартфон Honor 10 128 ГБ зеленый',
           price: 151,
           description: 'descr',
           image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/0b2d2f3ae5892a37ec70b5029bbeecc9/a7bea8f522bc122880ee9fa4e1cfe5f421488ecdd6e21330fc251eb309c85853.jpg'
         },
         {
+          id: 'phone_6',
           title: '6.3" Смартфон Xiaomi Redmi Note 7 128 ГБ черный',
           price: 156,
           description: 'descr',
           image: 'https://c.dns-shop.ru/thumb/st4/fit/320/250/85d609fdf14e1725aa75b72f873d6c7b/85abfdd1e5922b1d566107e673fb026ad4041610f4651bb95474e6d44d87e33d.jpg'
         },
         {
+          id: 'phone_7',
           title: '6.53" Смартфон Huawei Mate 20 128 ГБ синий',
           price: 189,
           description: 'descr',
@@ -151,42 +158,49 @@ export default class GoodstoreService {
       ],
       tv: [
         {
+          id: 'tv_1',
           title: '20" (50 см) Телевизор LED DEXP H20D7200E черный',
           price: 200,
           description: 'descr',
           image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/c6cd9c361a03ef4061a6684019374688/9d46840392f5fb0b3f8cdec79892724d4844537e035a39b1a2aa477d7aee4dd8.jpg'
         },
         {
+          id: 'tv_2',
           title: '22" (55 см) Телевизор LED Telefunken TF-LED22S49T2 черный',
           price: 300,
           description: 'descr',
           image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/932ce93a653cac63a57c3060adc84ade/1f77de1bd7dcad66773b35891beac55b45517f63ca60f1b661767d2641e06c7e.jpg'
         },
         {
+          id: 'tv_3',
           title: '24" (60 см) Телевизор LED Asano 24LH1020T черный',
           price: 100,
           description: 'descr',
           image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/f55d8da503c99e503c994475df87a232/53fc9d7242b80230064a2c8226393781e181d37eb3ef79e7dc8ad6cb90a925de.jpg'
         },
         {
+          id: 'tv_4',
           title: '24" (60 см) Телевизор LED Asano 24LH1011T белый',
           price: 150,
           description: 'descr',
           image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/7b6519608af60aefc56cf0f13763cfd5/ea44ba7f2511140d1c3fdf71216b1b896a724e0aaa7358c909bb8ee97b0209cf.jpg'
         },
         {
+          id: 'tv_5',
           title: '24" (60 см) Телевизор LED JVC LT24M485 черный',
           price: 151,
           description: 'descr',
           image: 'https://c.dns-shop.ru/thumb/st1/fit/320/250/c26927fa50ca854a7287662dabe34a84/9e289cbc96c8d2c26455de6b3e037af7959ac54533ee2934e15929e6574c9f05.jpg'
         },
         {
+          id: 'tv_6',
           title: '24" (61 см) Телевизор LED Hyundai H-LED24ET2003 черный',
           price: 156,
           description: 'descr',
           image: 'https://c.dns-shop.ru/thumb/st4/fit/320/250/88ad305997a47a3f90ae292d8d7028a6/fb9c13116643e17834b129657de9126c6866f34e3e267e4952370c764f85568b.jpg'
         },
         {
+          id: 'tv_7',
           title: '24" (61 см) Телевизор LED Kivi 24HB50BR серый',
           price: 189,
           description: 'descr',

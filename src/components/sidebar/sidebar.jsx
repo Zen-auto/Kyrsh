@@ -1,19 +1,61 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import classNames from 'classnames';
 
 import './sidebar.scss';
 
-export default class Sidebar extends Component {
+class Sidebar extends Component {
 
+  state = {
+    menuItems: [
+      {
+        id: 'pc',
+        title: 'PC',
+        path: '/pc'
+      },
+      {
+        id: 'tablets',
+        title: 'Tablets',
+        path: '/tablets'
+      },
+      {
+        id: 'phones',
+        title: 'Phones',
+        path: '/phones'
+      },
+      {
+        id: 'tv',
+        title: 'TV',
+        path: '/tv'
+      },
+    ]
+  };
 
   render() {
+    const { menuItems } = this.state;
+    const { location } = this.props;
+
+
     return (
       <aside className="sidebar">
         <div className="sidebar-menu">
-          <Link className="sidebar-menu__item" to="/pc">PC</Link>
-          <Link className="sidebar-menu__item" to="/tablets">Tablets</Link>
-          <Link className="sidebar-menu__item" to="/phones">Phones</Link>
-          <Link className="sidebar-menu__item" to="/tv">TV</Link>
+          {
+            menuItems.map(item => {
+
+              const itemClass = classNames('sidebar-menu__item', {
+                'sidebar-menu__item--active' : location.pathname === item.path
+              });
+
+              return (
+                <Link className={ itemClass }
+                      to={ item.path }
+                      key={ item.id }>
+                  { item.title }
+                  </Link>
+              )
+            })
+          }
         </div>
 
         <div className="sidebar-filters">
@@ -23,3 +65,5 @@ export default class Sidebar extends Component {
     )
   }
 }
+
+export default withRouter(Sidebar);

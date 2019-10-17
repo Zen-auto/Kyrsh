@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 import Sidebar from '../../sidebar/index'
 import Good from '../../good/index';
 
 import './category-page.scss';
 
-export default class CategoryPage extends Component {
+class CategoryPage extends Component {
 
   render() {
     const { goodList, title } = this.props;
@@ -33,3 +34,4 @@ export default class CategoryPage extends Component {
   }
 }
 
+export default withRouter(CategoryPage);
