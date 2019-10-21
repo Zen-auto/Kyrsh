@@ -5,6 +5,7 @@ import './spinner.css';
 const Spinner = () => {
   return (
     <div className="lds-css">
+      loading
       <div className="lds-double-ring">
         <div></div>
         <div></div>

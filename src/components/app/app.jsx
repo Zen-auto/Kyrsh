@@ -3,38 +3,28 @@ import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-ro
 import { connect } from 'react-redux';
 
 import './app.scss';
-import Header from '../header'
-import Sidebar from '../sidebar'
-import CategoriesList from '../categories-list'
+import Header from '../header';
+import Sidebar from '../sidebar';
+import Spinner from '../spinner';
+import CategoriesList from '../categories-list';
 import CategoryPage from '../pages/category-page';
 
 import { withGoodstoreService } from '../hoc';
-import { goodsLoaded } from '../../store/actions';
+import { goodsLoaded, booksRequested } from '../../store/actions';
 import { compose } from "../../utils/compose";
 
 class App extends Component {
 
-  state = {
-    isMounted: false
-  };
-
   componentDidMount() {
-    // receive data
-    const { goodstoreService } = this.props;
-    const data = goodstoreService.getGoods();
-
-    // dispatch action to Store
-    this.props.goodsLoaded(data);
-
-    this.setState({
-      isMounted: true
-    });
+    const { goodstoreService, goodsLoaded, booksRequested } = this.props;
+    booksRequested();
+      goodstoreService.getGoods()
+        .then(data => goodsLoaded(data));
   }
 
   render() {
 
-    const { goodsList } = this.props;
-    const { isMounted } = this.state;
+    const { goodsList, loading } = this.props;
 
     return (
       <div className="wrapper">
@@ -42,7 +32,11 @@ class App extends Component {
         <main>
           <div className="container">
 
-            { isMounted &&
+            { loading ? (
+
+              <Spinner />
+
+            ) : (
 
               <Switch>
 
@@ -50,22 +44,22 @@ class App extends Component {
                        component={CategoriesList}/>
 
                 <Route path="/pc"
-                       render={() => <CategoryPage goodList={goodsList.pc} title="PC"/>}/>
+                       render={() => <CategoryPage goodList={goodsList.pc} title="PC"/>} />
 
                 <Route path="/tablets"
-                       render={() => <CategoryPage goodList={goodsList.tablets} title="Tablets"/>}/>
+                       render={() => <CategoryPage goodList={goodsList.tablets} title="Tablets"/>} />
 
                 <Route path="/phones"
-                       render={() => <CategoryPage goodList={goodsList.phones} title="Phones"/>}/>
+                       render={() => <CategoryPage goodList={goodsList.phones} title="Phones"/>} />
 
                 <Route path="/tv"
-                       render={() => <CategoryPage goodList={goodsList.tv} title="TV"/>}/>
+                       render={() => <CategoryPage goodList={goodsList.tv} title="TV"/>} />
 
-                <Route render={() => <h2>Page not found</h2>}/>
+                <Route render={() => <h2>Page not found</h2>} />
 
               </Switch>
 
-            }
+            )}
 
           </div>
         </main>
@@ -82,12 +76,14 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    goodsList: state.goods
+    goodsList: state.goods,
+    loading: state.loading
   }
 };
 
 const mapDispatchToProps = {
-  goodsLoaded
+  goodsLoaded,
+  booksRequested
 };
 
 export default compose(

@@ -23,7 +23,7 @@ class CategoryPage extends Component {
             {
               goodList.map(good => {
                 return (
-                  <Good key={ good.id } good={ good}/>
+                  <Good key={ good.id } good={ good }/>
                 )
               })
             }
