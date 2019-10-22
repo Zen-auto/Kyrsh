@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 import './good.scss';
 
@@ -19,19 +20,20 @@ export default class Good extends Component {
   render() {
 
     const { inBasket } = this.state;
-    const { title, price, image } = this.props.good;
+    const { categoryUrl } = this.props;
+    const { id, title, price, image } = this.props.good;
     const buyBtn = inBasket ? { class: 'btn-light', text: 'В корзине'} : { class: 'btn', text: 'Купить'};
 
 
     return (
       <div className="good">
 
-        <a href="#" className="good__image-container" title={ title }>
+        <Link to={ `${categoryUrl}/${id}` } className="good__image-container" title={ title }>
           <img className="good__image" src={ image } alt={ title } />
-        </a>
+        </Link>
         <div className="good__footer">
           <div className="good__descr">
-            <a href="#" className="good__title" title={ title }>{ title }</a>
+            <Link to={ `${categoryUrl}/${id}` } className="good__title" title={ title }>{ title }</Link>
           </div>
           <div className="good__actions">
             <div className="good__price">$ { price }</div>

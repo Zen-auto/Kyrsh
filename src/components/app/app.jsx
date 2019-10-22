@@ -7,17 +7,17 @@ import Header from '../header';
 import Sidebar from '../sidebar';
 import Spinner from '../spinner';
 import CategoriesList from '../categories-list';
-import CategoryPage from '../pages/category-page';
+import { CategoryPage, DetailPage } from '../pages';
 
 import { withGoodstoreService } from '../hoc';
-import { goodsLoaded, booksRequested } from '../../store/actions';
+import { goodsLoaded, goodsRequested } from '../../store/actions';
 import { compose } from "../../utils/compose";
 
 class App extends Component {
 
   componentDidMount() {
-    const { goodstoreService, goodsLoaded, booksRequested } = this.props;
-    booksRequested();
+    const { goodstoreService, goodsLoaded, goodsRequested } = this.props;
+    goodsRequested();
       goodstoreService.getGoods()
         .then(data => goodsLoaded(data));
   }
@@ -41,21 +41,49 @@ class App extends Component {
               <Switch>
 
                 <Route path="/" exact={true}
-                       component={CategoriesList}/>
+                       component={ CategoriesList }/>
+
+                <Route path="/pc/:id"
+                       render={ ({ match }) => {
+                         const { id } = match.params;
+                         return <DetailPage itemId={ id } />
+                }}/>
+
+                <Route path="/tablets/:id"
+                       render={ ({ match }) => {
+                         const { id } = match.params;
+                         return <DetailPage itemId={ id } />
+                }}/>
+
+                <Route path="/phones/:id"
+                       render={ ({ match }) => {
+                         const { id } = match.params;
+                         return <DetailPage itemId={ id } />
+                }}/>
+
+                <Route path="/tv/:id"
+                       render={ ({ match }) => {
+                         const { id } = match.params;
+                         return <DetailPage itemId={ id } />
+                }}/>
+
+
 
                 <Route path="/pc"
-                       render={() => <CategoryPage goodList={goodsList.pc} title="PC"/>} />
+                       render={({ location }) => <CategoryPage goodList={goodsList.pc} title="PC" location={ location } exact={true} />} />
 
                 <Route path="/tablets"
-                       render={() => <CategoryPage goodList={goodsList.tablets} title="Tablets"/>} />
+                       render={({ location }) => <CategoryPage goodList={goodsList.tablets} title="Tablets" location={ location } exact={true} />} />
 
                 <Route path="/phones"
-                       render={() => <CategoryPage goodList={goodsList.phones} title="Phones"/>} />
+                       render={({ location }) => <CategoryPage goodList={goodsList.phones} title="Phones" location={ location } exact={true} />} />
 
                 <Route path="/tv"
-                       render={() => <CategoryPage goodList={goodsList.tv} title="TV"/>} />
+                       render={({ location }) => <CategoryPage goodList={goodsList.tv} title="TV" location={ location } exact={true} />} />
+
 
                 <Route render={() => <h2>Page not found</h2>} />
+
 
               </Switch>
 
@@ -83,7 +111,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   goodsLoaded,
-  booksRequested
+  goodsRequested
 };
 
 export default compose(

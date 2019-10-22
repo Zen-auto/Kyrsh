@@ -6,13 +6,13 @@ const goodsLoaded = (newGoods) => {
   };
 };
 
-const booksRequested = () => {
+const goodsRequested = () => {
   return {
-    type: 'BOOKS_REQUESTED'
+    type: 'GOODS_REQUESTED'
   }
 };
 
 export {
   goodsLoaded,
-  booksRequested
+  goodsRequested
 };

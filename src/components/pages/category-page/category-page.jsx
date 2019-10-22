@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
@@ -10,7 +10,7 @@ import './category-page.scss';
 class CategoryPage extends Component {
 
   render() {
-    const { goodList, title } = this.props;
+    const { goodList, title, location } = this.props;
 
     return(
       <div className="main-content">
@@ -23,7 +23,7 @@ class CategoryPage extends Component {
             {
               goodList.map(good => {
                 return (
-                  <Good key={ good.id } good={ good }/>
+                  <Good key={ good.id } good={ good } goodList={ goodList } categoryUrl={ location.pathname }/>
                 )
               })
             }
