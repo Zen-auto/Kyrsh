@@ -10,16 +10,13 @@ import CategoriesList from '../categories-list';
 import { CategoryPage, DetailPage } from '../pages';
 
 import { withGoodstoreService } from '../hoc';
-import { goodsLoaded, goodsRequested } from '../../store/actions';
+import { fetchGoods } from '../../store/actions';
 import { compose } from "../../utils/compose";
 
 class App extends Component {
 
   componentDidMount() {
-    const { goodstoreService, goodsLoaded, goodsRequested } = this.props;
-    goodsRequested();
-      goodstoreService.getGoods()
-        .then(data => goodsLoaded(data));
+    this.props.fetchBooks();
   }
 
   render() {
@@ -43,43 +40,128 @@ class App extends Component {
                 <Route path="/" exact={true}
                        component={ CategoriesList }/>
 
-                <Route path="/pc/:id"
-                       render={ ({ match }) => {
+                {/* Tablets */}
+
+                <Route path="/tablets/:id/characteristics"
+                       render={ ({ match, location }) => {
                          const { id } = match.params;
-                         return <DetailPage itemId={ id } />
-                }}/>
+                         return <DetailPage itemId={ id } currentTab="characteristics" pathName={ location.pathname } />
+                       }}/>
+
+                <Route path="/tablets/:id/opinion"
+                       render={ ({ match, location }) => {
+                         const { id } = match.params;
+                         return <DetailPage itemId={ id } currentTab="opinion" pathName={ location.pathname } />
+                       }}/>
 
                 <Route path="/tablets/:id"
-                       render={ ({ match }) => {
+                       render={ ({ match, location }) => {
                          const { id } = match.params;
-                         return <DetailPage itemId={ id } />
+                         return <DetailPage itemId={ id } currentTab="description" pathName={ location.pathname } />
                 }}/>
-
-                <Route path="/phones/:id"
-                       render={ ({ match }) => {
-                         const { id } = match.params;
-                         return <DetailPage itemId={ id } />
-                }}/>
-
-                <Route path="/tv/:id"
-                       render={ ({ match }) => {
-                         const { id } = match.params;
-                         return <DetailPage itemId={ id } />
-                }}/>
-
-
-
-                <Route path="/pc"
-                       render={({ location }) => <CategoryPage goodList={goodsList.pc} title="PC" location={ location } exact={true} />} />
 
                 <Route path="/tablets"
-                       render={({ location }) => <CategoryPage goodList={goodsList.tablets} title="Tablets" location={ location } exact={true} />} />
+                       render={({ location }) =>
+                         <CategoryPage
+                           goodList={goodsList.tablets}
+                           title="Tablets"
+                           location={ location }
+                           exact={true}
+                         />}
+                />
+
+
+                {/* PC */}
+
+                <Route path="/pc/:id/characteristics"
+                       render={ ({ match, location }) => {
+                         const { id } = match.params;
+                         return <DetailPage itemId={ id } currentTab="characteristics" pathName={ location.pathname } />
+                       }}/>
+
+                <Route path="/pc/:id/opinion"
+                       render={ ({ match, location }) => {
+                         const { id } = match.params;
+                         return <DetailPage itemId={ id } currentTab="opinion" pathName={ location.pathname } />
+                       }}/>
+
+                <Route path="/pc/:id"
+                       render={ ({ match, location }) => {
+                         const { id } = match.params;
+                         return <DetailPage itemId={ id } currentTab="description" pathName={ location.pathname } />
+                       }}/>
+
+                <Route path="/pc"
+                       render={({ location }) =>
+                         <CategoryPage
+                           goodList={goodsList.pc}
+                           title="PC"
+                           location={ location }
+                           exact={true}
+                         />}
+                />
+
+
+                {/* Phones */}
+
+                <Route path="/phones/:id/characteristics"
+                       render={ ({ match, location }) => {
+                         const { id } = match.params;
+                         return <DetailPage itemId={ id } currentTab="characteristics" pathName={ location.pathname } />
+                       }}/>
+
+                <Route path="/phones/:id/opinion"
+                       render={ ({ match, location }) => {
+                         const { id } = match.params;
+                         return <DetailPage itemId={ id } currentTab="opinion" pathName={ location.pathname } />
+                       }}/>
+
+                <Route path="/phones/:id"
+                       render={ ({ match, location }) => {
+                         const { id } = match.params;
+                         return <DetailPage itemId={ id } currentTab="description" pathName={ location.pathname } />
+                       }}/>
 
                 <Route path="/phones"
-                       render={({ location }) => <CategoryPage goodList={goodsList.phones} title="Phones" location={ location } exact={true} />} />
+                       render={({ location }) =>
+                         <CategoryPage
+                           goodList={goodsList.phones}
+                           title="Phones"
+                           location={ location }
+                           exact={true}
+                         />}
+                />
+
+
+                {/* TV */}
+
+                <Route path="/tv/:id/characteristics"
+                       render={ ({ match, location }) => {
+                         const { id } = match.params;
+                         return <DetailPage itemId={ id } currentTab="characteristics" pathName={ location.pathname } />
+                       }}/>
+
+                <Route path="/tv/:id/opinion"
+                       render={ ({ match, location }) => {
+                         const { id } = match.params;
+                         return <DetailPage itemId={ id } currentTab="opinion" pathName={ location.pathname } />
+                       }}/>
+
+                <Route path="/tv/:id"
+                       render={ ({ match, location }) => {
+                         const { id } = match.params;
+                         return <DetailPage itemId={ id } currentTab="description" pathName={ location.pathname } />
+                       }}/>
 
                 <Route path="/tv"
-                       render={({ location }) => <CategoryPage goodList={goodsList.tv} title="TV" location={ location } exact={true} />} />
+                       render={({ location }) =>
+                         <CategoryPage
+                           goodList={goodsList.tv}
+                           title="TV"
+                           location={ location }
+                           exact={true}
+                         />}
+                />
 
 
                 <Route render={() => <h2>Page not found</h2>} />
@@ -109,9 +191,11 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = {
-  goodsLoaded,
-  goodsRequested
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const { goodstoreService } = ownProps;
+  return {
+    fetchBooks: fetchGoods(goodstoreService, dispatch)
+  };
 };
 
 export default compose(

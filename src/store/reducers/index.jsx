@@ -7,12 +7,12 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 
   switch(action.type) {
-    case 'GOODS_REQUESTED':
+    case 'FETCH_GOODS_REQUEST':
       return {
         books: [],
         loading: true
       };
-    case 'GOODS_LOADED':
+    case 'FETCH_GOODS_SUCCESS':
       return {
         goods: action.payload,
         loading: false

@@ -1,18 +1,24 @@
 
 const goodsLoaded = (newGoods) => {
   return {
-    type: 'GOODS_LOADED',
+    type: 'FETCH_GOODS_SUCCESS',
     payload: newGoods
   };
 };
 
 const goodsRequested = () => {
   return {
-    type: 'GOODS_REQUESTED'
+    type: 'FETCH_GOODS_REQUEST'
   }
 };
 
+const fetchGoods = (bookstoreService, dispatch) => () => {
+  dispatch(goodsRequested());
+  bookstoreService.getGoods()
+    .then((data) => dispatch(goodsLoaded(data)))
+    // .catch(err => dispatch(goodsError(err)));
+};
+
 export {
-  goodsLoaded,
-  goodsRequested
+  fetchGoods
 };
