@@ -16,7 +16,7 @@ import { compose } from "../../utils/compose";
 class App extends Component {
 
   componentDidMount() {
-    this.props.fetchBooks();
+    this.props.fetchGoods();
   }
 
   render() {
@@ -194,7 +194,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { goodstoreService } = ownProps;
   return {
-    fetchBooks: fetchGoods(goodstoreService, dispatch)
+    fetchGoods: fetchGoods(goodstoreService, dispatch)
   };
 };
 

@@ -2,22 +2,60 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
-import Sidebar from '../../sidebar/index'
-import Good from '../../good/index';
+import Sidebar from '../../sidebar'
+import Good from '../../good';
+import Spinner from '../../spinner';
 
 import './category-page.scss';
 
 class CategoryPage extends Component {
+  constructor(props) {
+    super(props);
+    this.goodsListRef = React.createRef();
+  }
 
   state = {
-    sortOrder: 'increase'
+    sortOrder: 'increase',
+    toWhichProductNumberDisplayed: 8,
+    loading: false,
+    canSendAjax: true
   };
 
-  handleChange(e) {
-    const value = e.target.value;
+  componentDidMount() {
+    window.addEventListener('scroll', () => {
+      const documentHeight = document.documentElement.clientHeight;
+      const bottomCoord = this.goodsListRef.current.getBoundingClientRect().bottom;
 
+      if ((documentHeight >= bottomCoord + 100) && this.state.canSendAjax ) {
+        let promise = new Promise((resolve) => {
+          this.setState(state => {
+            // показываем лоадер
+            return ({
+              loading: true,
+              canSendAjax: false,
+              toWhichProductNumberDisplayed: state.toWhichProductNumberDisplayed + 9
+            })
+          });
+          resolve();
+        });
+
+        promise
+          .then(() => {
+            this.setState({
+              // скрываем лоадер
+              loading: false,
+              canSendAjax: true
+            });
+          })
+          .catch(err => console.log('Error: ' + err));
+      }
+    })
+
+  }
+
+  handleChange(e) {
     this.setState({
-      sortOrder: value
+      sortOrder: e.target.value
     });
   }
 
@@ -34,6 +72,8 @@ class CategoryPage extends Component {
 
   render() {
     const { goodList, title, location } = this.props;
+    const { loading, toWhichProductNumberDisplayed } = this.state;
+    const spinner = loading ? <Spinner /> : null;
 
     return(
       <div className="main-content">
@@ -49,14 +89,18 @@ class CategoryPage extends Component {
 
           { this.sortGoods() }
 
-          <div className="goods-list">
+          <div className="goods-list" ref={ this.goodsListRef }>
             {
-              goodList.map(good => {
-                return (
-                  <Good key={ good.id } good={ good } categoryUrl={ location.pathname }/>
-                )
+              goodList.map((good, index )=> {
+                while(index <= toWhichProductNumberDisplayed) {
+                  return (
+                    <Good key={ good.id } good={ good } categoryUrl={ location.pathname }/>
+                  )
+                }
               })
             }
+
+            { spinner }
           </div>
         </div>
       </div>

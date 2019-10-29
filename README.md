@@ -1,6 +1,15 @@
+## Проект Интернет-магазин на React/Redux
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Состояит из страниц:
+- Главная
+- Страница категорий
+- Детальная страница
+
+
+## Реализованы фичи:
+- Сортировка товаров по убыванию/возрастанию цены
 
 In the project directory, you can run:
 
