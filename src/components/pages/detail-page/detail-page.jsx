@@ -3,6 +3,8 @@ import { Switch, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
+import Breadcrumbs from '../../breadcrumbs';
+
 import './detail-page.scss';
 
 class DetailPage extends Component {
@@ -58,8 +60,29 @@ class DetailPage extends Component {
     const { title, price, description, image } = this.currentGood;
     const { tabs } = this.state;
 
+    console.log(this.props)
+
     return(
       <div>
+        <Breadcrumbs
+          links={[
+            {
+              id: 1,
+              title: 'Каталог',
+              path: '/'
+            },
+            {
+              id: 2,
+              title: 'Имя категории',
+              path: '/'
+            },
+            {
+              id: 3,
+              title: title
+            }
+          ]}
+        />
+
         <div className="detail-top">
           <div className="detail-top__image-wrapper">
             <img

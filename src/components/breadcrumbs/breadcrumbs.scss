@@ -1,0 +1,28 @@
+.breadcrumbs {
+    margin-top: 20px;
+}
+.breadcrumbs__item {
+    display: inline-block;
+    font-size: 15px;
+    cursor: default;
+
+    &::before {
+        content: '/';
+        font-size: 15px;
+        transform: translateY(-50%);
+        color: grey;
+        padding: 0 5px;
+    }
+
+    &:first-child::before {
+        display: none;
+    }
+}
+.breadcrumbs__link {
+    color: #027DB8;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
