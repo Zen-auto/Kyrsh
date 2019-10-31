@@ -7,7 +7,7 @@ import Header from '../header';
 import Sidebar from '../sidebar';
 import Spinner from '../spinner';
 import CategoriesList from '../categories-list';
-import { CategoryPage, DetailPage } from '../pages';
+import { CategoryPage, DetailPage, CartPage } from '../pages';
 
 import { withGoodstoreService } from '../hoc';
 import { fetchGoods } from '../../store/actions';
@@ -43,21 +43,33 @@ class App extends Component {
                 {/* Tablets */}
 
                 <Route path="/tablets/:id/characteristics"
-                       render={ ({ match, location }) => {
+                       render={ ({ match }) => {
                          const { id } = match.params;
-                         return <DetailPage itemId={ id } currentTab="characteristics" pathName={ location.pathname } />
+                         return <DetailPage
+                                  itemId={ id }
+                                  categoryId="tablets"
+                                  currentTab="characteristics"
+                         />
                        }}/>
 
                 <Route path="/tablets/:id/opinion"
-                       render={ ({ match, location }) => {
+                       render={ ({ match }) => {
                          const { id } = match.params;
-                         return <DetailPage itemId={ id } currentTab="opinion" pathName={ location.pathname } />
+                         return <DetailPage
+                                  itemId={ id }
+                                  categoryId="tablets"
+                                  currentTab="opinion"
+                         />
                        }}/>
 
                 <Route path="/tablets/:id"
-                       render={ ({ match, location }) => {
+                       render={ ({ match }) => {
                          const { id } = match.params;
-                         return <DetailPage itemId={ id } currentTab="description" pathName={ location.pathname } />
+                         return <DetailPage
+                                  itemId={ id }
+                                  categoryId="tablets"
+                                  currentTab="description"
+                         />
                 }}/>
 
                 <Route path="/tablets"
@@ -74,21 +86,33 @@ class App extends Component {
                 {/* PC */}
 
                 <Route path="/pc/:id/characteristics"
-                       render={ ({ match, location }) => {
+                       render={ ({ match }) => {
                          const { id } = match.params;
-                         return <DetailPage itemId={ id } currentTab="characteristics" pathName={ location.pathname } />
-                       }}/>
+                         return <DetailPage
+                                  itemId={ id }
+                                  categoryId="pc"
+                                  currentTab="characteristics"
+                         />
+                }}/>
 
                 <Route path="/pc/:id/opinion"
-                       render={ ({ match, location }) => {
+                       render={ ({ match }) => {
                          const { id } = match.params;
-                         return <DetailPage itemId={ id } currentTab="opinion" pathName={ location.pathname } />
-                       }}/>
+                         return <DetailPage
+                                  itemId={ id }
+                                  categoryId="pc"
+                                  currentTab="opinion"
+                         />
+                }}/>
 
                 <Route path="/pc/:id"
                        render={ ({ match, location }) => {
                          const { id } = match.params;
-                         return <DetailPage itemId={ id } currentTab="description" pathName={ location.pathname } />
+                         return <DetailPage
+                                  itemId={ id }
+                                  categoryId="pc"
+                                  currentTab="description"
+                                />
                        }}/>
 
                 <Route path="/pc"
@@ -105,21 +129,33 @@ class App extends Component {
                 {/* Phones */}
 
                 <Route path="/phones/:id/characteristics"
-                       render={ ({ match, location }) => {
+                       render={ ({ match }) => {
                          const { id } = match.params;
-                         return <DetailPage itemId={ id } currentTab="characteristics" pathName={ location.pathname } />
+                         return <DetailPage
+                                 itemId={ id }
+                                 categoryId="phones"
+                                 currentTab="characteristics"
+                         />
                        }}/>
 
                 <Route path="/phones/:id/opinion"
-                       render={ ({ match, location }) => {
+                       render={ ({ match }) => {
                          const { id } = match.params;
-                         return <DetailPage itemId={ id } currentTab="opinion" pathName={ location.pathname } />
+                         return <DetailPage
+                                  itemId={ id }
+                                  categoryId="phones"
+                                  currentTab="opinion"
+                         />
                        }}/>
 
                 <Route path="/phones/:id"
-                       render={ ({ match, location }) => {
+                       render={ ({ match }) => {
                          const { id } = match.params;
-                         return <DetailPage itemId={ id } currentTab="description" pathName={ location.pathname } />
+                         return <DetailPage
+                                  itemId={ id }
+                                  categoryId="phones"
+                                  currentTab="description"
+                         />
                        }}/>
 
                 <Route path="/phones"
@@ -136,24 +172,46 @@ class App extends Component {
                 {/* TV */}
 
                 <Route path="/tv/:id/characteristics"
-                       render={ ({ match, location }) => {
+                       render={ ({ match }) => {
                          const { id } = match.params;
-                         return <DetailPage itemId={ id } currentTab="characteristics" pathName={ location.pathname } />
+                         return <DetailPage
+                                  itemId={ id }
+                                  categoryId="tv"
+                                  currentTab="characteristics"
+                         />
                        }}/>
 
                 <Route path="/tv/:id/opinion"
-                       render={ ({ match, location }) => {
+                       render={ ({ match }) => {
                          const { id } = match.params;
-                         return <DetailPage itemId={ id } currentTab="opinion" pathName={ location.pathname } />
+                         return <DetailPage
+                                  itemId={ id }
+                                  categoryId="tv"
+                                  currentTab="opinion"
+                         />
                        }}/>
 
                 <Route path="/tv/:id"
-                       render={ ({ match, location }) => {
+                       render={ ({ match }) => {
                          const { id } = match.params;
-                         return <DetailPage itemId={ id } currentTab="description" pathName={ location.pathname } />
+                         return <DetailPage
+                                  itemId={ id }
+                                  categoryId="tv"
+                                  currentTab="description"
+                         />
                        }}/>
 
                 <Route path="/tv"
+                       render={({ location }) =>
+                         <CategoryPage
+                           goodList={goodsList.tv}
+                           title="TV"
+                           location={ location }
+                           exact={true}
+                         />}
+                />
+
+                <Route path="/cart"
                        render={({ location }) =>
                          <CategoryPage
                            goodList={goodsList.tv}

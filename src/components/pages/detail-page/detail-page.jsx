@@ -9,29 +9,6 @@ import './detail-page.scss';
 
 class DetailPage extends Component {
 
-  state = {
-    tabs: {
-      opinion: {
-        tabId: 'opinionTab',
-        tabTitle: 'Отзывы',
-        tabPathTo: `${ this.props.pathName }/opinion`,
-        tabContent: 'Контент отзывов'
-      },
-      characteristics: {
-        tabId: 'characteristicsTab',
-        tabTitle: 'Характеристики',
-        tabPathTo: `${ this.props.pathName }/characteristics`,
-        tabContent: 'Контент Характеристик'
-      },
-      description: {
-        tabId: 'descriptionTab',
-        tabTitle: 'Описание',
-        tabPathTo: `${ this.props.pathName }`,
-        tabContent: 'Контент описания'
-      }
-    }
-  };
-
   findCurrentGood(goodsList, itemId) {
     for (let key in goodsList) {
       goodsList[key].forEach(category => {
@@ -43,24 +20,44 @@ class DetailPage extends Component {
   }
 
   findCurrentTab() {
-    for (let key in this.state.tabs) {
+    for (let key in this.tabs) {
       if (key === this.props.currentTab) {
-        this.activeTab = this.state.tabs[key];
+        this.activeTab = this.tabs[key];
       }
     }
   }
 
 
   render() {
-    const { goodsList, itemId, currentTab, pathName } = this.props;
+    const { goodsList, itemId, categoryId, currentTab } = this.props;
 
     this.findCurrentGood(goodsList, itemId);
+
+    this.tabs = {
+      opinion: {
+        tabId: 'opinionTab',
+        tabTitle: 'Отзывы',
+        tabPathTo: `/${ this.props.categoryId }/${ this.props.itemId }/opinion`,
+        tabContent: this.currentGood.opinion
+      },
+      characteristics: {
+        tabId: 'characteristicsTab',
+        tabTitle: 'Характеристики',
+        tabPathTo: `/${ this.props.categoryId }/${ this.props.itemId }/characteristics`,
+        tabContent: this.currentGood.characteristics
+      },
+      description: {
+        tabId: 'descriptionTab',
+        tabTitle: 'Описание',
+        tabPathTo: `/${ this.props.categoryId }/${ this.props.itemId }`,
+        tabContent: this.currentGood.description
+      }
+    };
+
+
     this.findCurrentTab();
 
     const { title, price, description, image } = this.currentGood;
-    const { tabs } = this.state;
-
-    console.log(this.props)
 
     return(
       <div>
@@ -73,8 +70,8 @@ class DetailPage extends Component {
             },
             {
               id: 2,
-              title: 'Имя категории',
-              path: '/'
+              title: categoryId,
+              path: `/${ categoryId }`
             },
             {
               id: 3,
@@ -105,16 +102,16 @@ class DetailPage extends Component {
           <div className="tabs">
             <div className="tabs__menu">
               {
-                Object.keys(tabs).map(tab => {
+                Object.keys(this.tabs).map(tab => {
                   const tabClass = classNames('tabs__link', {
                     'tabs__link--active' : tab === currentTab
                   });
 
                   return (
-                    <Link key={ tabs[tab].tabId }
-                          to={  tabs[tab].tabPathTo }
+                    <Link key={ this.tabs[tab].tabId }
+                          to={  this.tabs[tab].tabPathTo }
                           className={ tabClass } >
-                      { tabs[tab].tabTitle }
+                      { this.tabs[tab].tabTitle }
                     </Link>
                   )
                 })
