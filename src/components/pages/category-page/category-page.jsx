@@ -3,57 +3,27 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
-import Sidebar from '../../sidebar'
+import Sidebar from '../../sidebar';
+
+import { PhonesList, AbstractList, TabletsList, PcList, TvList } from '../../lists';
 import Good from '../../good';
 import Spinner from '../../spinner';
 import Breadcrumbs from '../../breadcrumbs';
 
 import './category-page.scss';
+// import TabletsList from "../../lists/tablets-list";
 
 class CategoryPage extends Component {
-  constructor(props) {
-    super(props);
-    this.goodsListRef = React.createRef();
-  }
 
   state = {
     sortOrder: 'increase',
-    toWhichProductNumberDisplayed: 8,
-    loading: false,
-    canSendAjax: true
+    toWhichPcNumberDisplayed: 8,
+    toWhichTabletNumberDisplayed: 8,
+    toWhichPhoneNumberDisplayed: 8,
+    toWhichTvNumberDisplayed: 8,
+    // loading: false,
+    // canSendAjax: true
   };
-
-  componentDidMount() {
-    window.addEventListener('scroll', () => {
-      const documentHeight = document.documentElement.clientHeight;
-      const bottomCoord = this.goodsListRef.current.getBoundingClientRect().bottom;
-
-      if ((documentHeight >= bottomCoord + 100) && this.state.canSendAjax ) {
-        let promise = new Promise((resolve) => {
-          this.setState(state => {
-            // показываем лоадер
-            return ({
-              loading: true,
-              canSendAjax: false,
-              toWhichProductNumberDisplayed: state.toWhichProductNumberDisplayed + 9
-            })
-          });
-          resolve();
-        });
-
-        promise
-          .then(() => {
-            this.setState({
-              // скрываем лоадер
-              loading: false,
-              canSendAjax: true
-            });
-          })
-          .catch(err => console.log('Error: ' + err));
-      }
-    })
-
-  }
 
   handleChange(e) {
     this.setState({
@@ -73,9 +43,25 @@ class CategoryPage extends Component {
 
 
   render() {
-    const { goodList, title, location } = this.props;
-    const { loading, toWhichProductNumberDisplayed } = this.state;
-    const spinner = loading ? <Spinner /> : null;
+    const { goodList, title, categoryId } = this.props;
+
+    let goodsListBlock = null;
+    console.log(categoryId)
+    switch(categoryId) {
+      case 'tablets':
+        goodsListBlock = <TabletsList goodList={ goodList } />;
+        break;
+      case 'pc':
+        goodsListBlock = <PcList goodList={ goodList } />;
+        break;
+      case 'phones':
+        goodsListBlock = <PhonesList goodList={ goodList } />;
+        break;
+      case 'tv':
+        goodsListBlock = <TvList goodList={ goodList } />;
+        break;
+
+    }
 
     return(
       <Fragment>
@@ -106,19 +92,10 @@ class CategoryPage extends Component {
 
             { this.sortGoods() }
 
-            <div className="goods-list" ref={ this.goodsListRef }>
-              {
-                goodList.map((good, index )=> {
-                  while(index <= toWhichProductNumberDisplayed) {
-                    return (
-                      <Good key={ good.id } good={ good } categoryUrl={ location.pathname }/>
-                    )
-                  }
-                })
-              }
+            {
+              goodsListBlock
+            }
 
-              { spinner }
-            </div>
           </div>
         </div>
       </Fragment>

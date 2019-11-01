@@ -40,6 +40,10 @@ class App extends Component {
                 <Route path="/" exact={true}
                        component={ CategoriesList }/>
 
+                <Route path="/cart" exact={true}
+                       render={() => <CartPage /> }
+                />
+
                 {/* Tablets */}
 
                 <Route path="/tablets/:id/characteristics"
@@ -73,11 +77,11 @@ class App extends Component {
                 }}/>
 
                 <Route path="/tablets"
-                       render={({ location }) =>
+                       render={() =>
                          <CategoryPage
-                           goodList={goodsList.tablets}
+                           goodList={ goodsList.tablets }
                            title="Tablets"
-                           location={ location }
+                           categoryId="tablets"
                            exact={true}
                          />}
                 />
@@ -106,7 +110,7 @@ class App extends Component {
                 }}/>
 
                 <Route path="/pc/:id"
-                       render={ ({ match, location }) => {
+                       render={ ({ match }) => {
                          const { id } = match.params;
                          return <DetailPage
                                   itemId={ id }
@@ -116,11 +120,11 @@ class App extends Component {
                        }}/>
 
                 <Route path="/pc"
-                       render={({ location }) =>
+                       render={() =>
                          <CategoryPage
                            goodList={goodsList.pc}
                            title="PC"
-                           location={ location }
+                           categoryId="pc"
                            exact={true}
                          />}
                 />
@@ -159,11 +163,11 @@ class App extends Component {
                        }}/>
 
                 <Route path="/phones"
-                       render={({ location }) =>
+                       render={() =>
                          <CategoryPage
-                           goodList={goodsList.phones}
+                           goodList={ goodsList.phones }
                            title="Phones"
-                           location={ location }
+                           categoryId="phones"
                            exact={true}
                          />}
                 />
@@ -202,24 +206,16 @@ class App extends Component {
                        }}/>
 
                 <Route path="/tv"
-                       render={({ location }) =>
+                       render={() =>
                          <CategoryPage
                            goodList={goodsList.tv}
                            title="TV"
-                           location={ location }
+                           categoryId="tv"
                            exact={true}
                          />}
                 />
 
-                <Route path="/cart"
-                       render={({ location }) =>
-                         <CategoryPage
-                           goodList={goodsList.tv}
-                           title="TV"
-                           location={ location }
-                           exact={true}
-                         />}
-                />
+
 
 
                 <Route render={() => <h2>Page not found</h2>} />

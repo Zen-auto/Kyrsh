@@ -17,13 +17,49 @@ class CartPage extends Component {
 
 
   render() {
+    const { items, total } = this.props;
+
+
+    const renderRow = (item, index) => {
+      const { id, title, count, price } = item;
+      return (
+        <tr key={ id }>
+          <td>{ index + 1 }</td>
+          <td>{ title }</td>
+          <td>{ count }</td>
+          <td>{ price }</td>
+          <td>
+            -
+          </td>
+        </tr>
+      )
+    };
 
 
     return(
       <div>
         <h1>Корзина</h1>
+        <table className="cart-table">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Item</th>
+            <th>Count</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+          </thead>
 
+          <tbody>
+            {
+              items.map(renderRow)
+            }
+          </tbody>
+        </table>
 
+        <div className="total">
+          Total: ${ total }
+        </div>
       </div>
     )
   }
@@ -32,7 +68,8 @@ class CartPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    goodsList: state.goods
+    items: state.cartItems,
+    total: state.orderTotal,
   }
 };
 
