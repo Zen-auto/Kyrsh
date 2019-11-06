@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './to-cart-btn.scss';
+import { Link } from 'react-router-dom';
 import {connect} from "react-redux";
 
 class ToCartBtn extends Component {
@@ -8,18 +9,18 @@ class ToCartBtn extends Component {
     const { productsInCart } = this.props;
 
     return (
-      <a className="to-cart-btn" href="" title="В корзину">
+      <Link className="to-cart-btn" to="/cart" title="В корзину">
         <span className="to-cart-btn__quantity">
-          22
+          { productsInCart }
         </span>
-      </a>
+      </Link>
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    productsInCart: state
+    productsInCart: state.productsInCart
   }
 };
 

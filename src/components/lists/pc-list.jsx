@@ -48,12 +48,14 @@ class PcList extends Component {
     }
   }
 
+  onScroll = () => this.fetchData();
+
   componentDidMount() {
-    window.addEventListener('scroll', () => this.fetchData())
+    window.addEventListener('scroll', this.onScroll)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', () => this.fetchData())
+    window.removeEventListener('scroll', this.onScroll)
   }
 
 
@@ -71,7 +73,7 @@ class PcList extends Component {
                 <Good
                   key={ good.id }
                   good={ good }
-                  onAddedToCart={ () => onAddedToCart(good.id) }
+                  onAddedToCart={ () => onAddedToCart(good.id, good.categoryId) }
                 />
               )
             }
@@ -91,9 +93,8 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddedToCart: (id) => dispatch(goodAddedToCart(id))
+    onAddedToCart: (id, categoryId) => dispatch(goodAddedToCart(id, categoryId))
   }
 };
 
-// export default PcList;
 export default connect(mapStateToProps, mapDispatchToProps)(PcList);

@@ -17,35 +17,43 @@ class AbstractList extends Component {
     canSendAjax: true
   };
 
-  componentDidMount() {
-    window.addEventListener('scroll', () => {
-      const documentHeight = document.documentElement.clientHeight;
-      const bottomCoord = this.goodsListRef.current.getBoundingClientRect().bottom;
+  fetchData() {
+    const documentHeight = document.documentElement.clientHeight;
+    const bottomCoord = this.pcListRef.current.getBoundingClientRect().bottom;
 
-      if ((documentHeight >= bottomCoord + 100) && this.state.canSendAjax ) {
-        let promise = new Promise((resolve) => {
-          this.setState(state => {
-            // показываем лоадер
-            return ({
-              loading: true,
-              canSendAjax: false,
-              toWhichProductNumberDisplayed: state.toWhichProductNumberDisplayed + 9
-            })
-          });
-          resolve();
-        });
-
-        promise
-          .then(() => {
-            this.setState({
-              // скрываем лоадер
-              loading: false,
-              canSendAjax: true
-            });
+    if ((documentHeight >= bottomCoord + 100) && this.state.canSendAjax ) {
+      let promise = new Promise((resolve) => {
+        this.setState(state => {
+          // показываем лоадер
+          return ({
+            loading: true,
+            canSendAjax: false,
+            toWhichGoodNumberDisplayed: state.toWhichGoodNumberDisplayed + 9
           })
-          .catch(err => console.log('Error: ' + err));
-      }
-    })
+        });
+        resolve();
+      });
+
+      promise
+        .then(() => {
+          this.setState({
+            // скрываем лоадер
+            loading: false,
+            canSendAjax: true
+          });
+        })
+        .catch(err => console.log('Error: ' + err));
+    }
+  }
+
+  onScroll = () => this.fetchData();
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll)
   }
 
 

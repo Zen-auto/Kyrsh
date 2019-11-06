@@ -12,17 +12,17 @@ const goodsRequested = () => {
   }
 };
 
-const fetchGoods = (bookstoreService, dispatch) => () => {
+const fetchGoods = (goodstoreService, dispatch) => () => {
   dispatch(goodsRequested());
-  bookstoreService.getGoods()
+  goodstoreService.getGoods()
     .then((data) => dispatch(goodsLoaded(data)))
     // .catch(err => dispatch(goodsError(err)));
 };
 
-const goodAddedToCart = (bookId) => {
+const goodAddedToCart = (goodId, categoryId) => {
   return {
     type: 'GOOD_ADDED_TO_CART',
-    payload: bookId
+    payload: { goodId: goodId, categoryId: categoryId }
   };
 };
 

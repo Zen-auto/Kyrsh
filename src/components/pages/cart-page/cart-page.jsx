@@ -18,15 +18,20 @@ class CartPage extends Component {
 
   render() {
     const { items, total } = this.props;
+    console.log(items)
 
 
     const renderRow = (item, index) => {
-      const { id, title, count, price } = item;
+      const { id, title, price } = item;
+      // for (let key in items) {
+      //   console.log(key)
+      //   console.log(items[key])
+      // }
       return (
         <tr key={ id }>
           <td>{ index + 1 }</td>
           <td>{ title }</td>
-          <td>{ count }</td>
+          <td>{  }</td>
           <td>{ price }</td>
           <td>
             -

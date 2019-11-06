@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import Breadcrumbs from '../../breadcrumbs';
 
 import './detail-page.scss';
+import {goodAddedToCart} from "../../../store/actions";
 
 class DetailPage extends Component {
 
@@ -27,9 +28,17 @@ class DetailPage extends Component {
     }
   }
 
+  togglePuttingToCart() {
+    this.setState((state) => {
+      return {
+        inCart: !state.inCart
+      }
+    })
+  }
+
 
   render() {
-    const { goodsList, itemId, categoryId, currentTab } = this.props;
+    const { goodsList, itemId, categoryId, currentTab, onAddedToCart } = this.props;
 
     this.findCurrentGood(goodsList, itemId);
 
@@ -57,7 +66,18 @@ class DetailPage extends Component {
 
     this.findCurrentTab();
 
-    const { title, price, description, image } = this.currentGood;
+    const { id, title, price, description, image, inCart } = this.currentGood;
+
+    const buyBtn = inCart ?
+      <Link className='detail-top__btn btn-light' to='/cart' title='Перейти в корзину'>Оформить</Link> :
+      <button className='detail-top__btn btn'
+              onClick={ () => {
+                onAddedToCart(id, categoryId)
+              }}>Купить
+      </button>;
+
+
+
 
     return(
       <div>
@@ -93,7 +113,9 @@ class DetailPage extends Component {
             <h2 className="detail-top__title">{ title }</h2>
             <div className="detail-top__buy-block">
               <div className="detail-top__price">$ { price }</div>
-              <button className="detail-top__btn btn">Купить</button>
+
+              { buyBtn }
+
             </div>
           </div>
         </div>
@@ -139,4 +161,10 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(DetailPage)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddedToCart: (id, categoryId) => dispatch(goodAddedToCart(id, categoryId))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DetailPage)

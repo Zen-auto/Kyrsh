@@ -47,12 +47,14 @@ class TabletsList extends Component {
     }
   }
 
+  onScroll = () => this.fetchData();
+
   componentDidMount() {
-    window.addEventListener('scroll', () => this.fetchData())
+    window.addEventListener('scroll', this.onScroll)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', () => this.fetchData())
+    window.removeEventListener('scroll', this.onScroll)
   }
 
 

@@ -2,26 +2,11 @@ const initialState = {
   goods: [],
   productsInCart: 0,
   loading: true,
-  cartItems: [
-    {
-      id: 1,
-      title: 'Book 1',
-      count: 3,
-      price: 150
-    },
-    {
-      id: 2,
-      title: 'Book 2',
-      count: 2,
-      price: 90
-    }
-  ],
+  cartItems: [],
   orderTotal: 220
 };
 
 const reducer = (state = initialState, action) => {
-
-  console.log(action.type)
 
   switch(action.type) {
     case 'FETCH_GOODS_REQUEST':
@@ -35,6 +20,37 @@ const reducer = (state = initialState, action) => {
         ...state,
         goods: action.payload,
         loading: false
+      };
+    case 'GOOD_ADDED_TO_CART':
+      const goodId = action.payload.goodId;
+      const categoryId = action.payload.categoryId;
+      const itemIndex = state.goods[categoryId].findIndex(({id}) => id === goodId);
+      const item = state.goods[categoryId][itemIndex];
+
+      const newItem = {
+        ...item,
+        inCart: true
+      };
+
+      const category = [
+        ...state.goods[categoryId].slice(0, itemIndex),
+        newItem,
+        ...state.goods[categoryId].slice(itemIndex + 1),
+      ];
+
+      return {
+        ...state,
+        // добавляем выбранный товар в state
+        goods: {
+          ...state.goods,
+          [categoryId]: category
+        },
+        // товары в корзине
+        cartItems: [
+          ...state.cartItems,
+          newItem
+        ],
+        ...state.productsInCart++
       };
 
     default:

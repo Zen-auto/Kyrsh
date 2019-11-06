@@ -1,29 +1,19 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import {connect} from "react-redux";
 
 import './good.scss';
 
 class Good extends Component {
 
-  state = {
-    inBasket: false
-  };
-
-  togglePuttingToCart() {
-    this.setState((state) => {
-      return {
-        inBasket: !state.inBasket
-      }
-    })
-  }
-
   render() {
-
-    const { inBasket } = this.state;
     const { onAddedToCart } = this.props;
-    const { id, categoryId, title, price, image } = this.props.good;
-    const buyBtn = inBasket ? { class: 'btn-light', text: 'В корзине'} : { class: 'btn', text: 'Купить'};
-
+    const { id, categoryId, title, price, image, inCart } = this.props.good;
+    const buyBtn = inCart ?
+      <Link className='btn-light' to='/cart' title='Перейти в корзину'>Оформить</Link> :
+      <button className='btn'
+              onClick={ () => { onAddedToCart() }}>Купить
+      </button>;
 
     return (
       <div className="good">
@@ -37,11 +27,9 @@ class Good extends Component {
           </div>
           <div className="good__actions">
             <div className="good__price">$ { price }</div>
-            <button
-              className={ buyBtn.class }
-              onClick={ onAddedToCart }>
-              { buyBtn.text }
-            </button>
+
+            { buyBtn }
+
           </div>
         </div>
       </div>
@@ -49,4 +37,10 @@ class Good extends Component {
   }
 }
 
-export default Good;
+const mapStateToProps = (state) => {
+  return {
+    productsInCart: state.goods
+  }
+};
+
+export default connect(mapStateToProps)(Good)
