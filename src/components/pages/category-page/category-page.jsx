@@ -11,19 +11,33 @@ import Spinner from '../../spinner';
 import Breadcrumbs from '../../breadcrumbs';
 
 import './category-page.scss';
+import {goodAddedToCart} from "../../../store/actions";
 // import TabletsList from "../../lists/tablets-list";
 
 class CategoryPage extends Component {
+  constructor(props) {
+    super(props);
+    this.pcListRef = React.createRef();
+  }
 
   state = {
     sortOrder: 'increase',
-    toWhichPcNumberDisplayed: 8,
-    toWhichTabletNumberDisplayed: 8,
-    toWhichPhoneNumberDisplayed: 8,
-    toWhichTvNumberDisplayed: 8,
-    // loading: false,
-    // canSendAjax: true
+    countGoodsRender: 8,
+    // countGoodsRender: null,
+    countPcRender: 8,
+    countTabletsRender: 8,
+    countPhonesRender: 8,
+    countTvRender: 8,
+
+    loading: false,
+    canSendAjax: true
   };
+
+  countGoodsRender = 8;
+  // countPcRender = 8;
+  // countTabletsRender = 8;
+  // countPhonesRender = 8;
+  // countTvRender = 8;
 
   handleChange(e) {
     this.setState({
@@ -42,23 +56,86 @@ class CategoryPage extends Component {
   }
 
 
-  render() {
-    const { goodList, title, categoryId } = this.props;
+  fetchData(category) {
+    const documentHeight = document.documentElement.clientHeight;
+    const bottomCoord = this.pcListRef.current.getBoundingClientRect().bottom;
 
-    let goodsListBlock = null;
-    console.log(categoryId)
+    if ((documentHeight >= bottomCoord + 100) && this.state.canSendAjax ) {
+      let promise = new Promise((resolve) => {
+        console.log(this.state.countTabletsRender)
+        console.log(this.state.countPcRender)
+
+
+        if (category === 'pc') {
+          this.setState(state => {
+            return ({
+              countPcRender: state.countPcRender + 9
+            })
+          });
+        } else if (category === 'tablets') {
+          this.setState(state => {
+            return ({
+              countTabletsRender: state.countTabletsRender + 9
+            })
+          });
+        }
+
+        this.setState(state => {
+          // показываем лоадер
+          return ({
+            loading: true,
+            canSendAjax: false
+          })
+        });
+        resolve();
+      });
+
+      promise
+        .then(() => {
+          this.setState({
+            // скрываем лоадер
+            loading: false,
+            canSendAjax: true
+          });
+        })
+        .catch(err => console.log('Error: ' + err));
+    }
+  }
+
+  // onScroll = () => this.fetchData();
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll)
+  }
+
+
+  render() {
+    const { goodList, title, categoryId, onAddedToCart } = this.props;
+    const { loading, countGoodsRender } = this.state;
+    const spinner = loading ? <Spinner /> : null;
+
+    // let goodsListBlock = null;
+    // console.log(categoryId)
     switch(categoryId) {
       case 'tablets':
-        goodsListBlock = <TabletsList goodList={ goodList } />;
+        this.onScroll = () => this.fetchData('tablets');
+        this.countGoodsRender = this.state.countTabletsRender;
+        // goodsListBlock = <TabletsList goodList={ goodList } />;
         break;
       case 'pc':
-        goodsListBlock = <PcList goodList={ goodList } />;
+        this.onScroll = () => this.fetchData('pc');
+        this.countGoodsRender = this.state.countPcRender;
+        // goodsListBlock = <PcList goodList={ goodList } />;
         break;
       case 'phones':
-        goodsListBlock = <PhonesList goodList={ goodList } />;
+        // goodsListBlock = <PhonesList goodList={ goodList } />;
         break;
       case 'tv':
-        goodsListBlock = <TvList goodList={ goodList } />;
+        // goodsListBlock = <TvList goodList={ goodList } />;
         break;
 
     }
@@ -92,9 +169,27 @@ class CategoryPage extends Component {
 
             { this.sortGoods() }
 
-            {
-              goodsListBlock
-            }
+            {/*{*/}
+              {/*goodsListBlock*/}
+            {/*}*/}
+
+            <div className="goods-list" ref={ this.pcListRef }>
+              {
+                goodList.map((good, index )=> {
+                  while(index <= this.countGoodsRender) {
+                    return (
+                      <Good
+                        key={ good.id }
+                        good={ good }
+                        onAddedToCart={ () => onAddedToCart(good.id, good.categoryId) }
+                      />
+                    )
+                  }
+                })
+              }
+
+              { spinner }
+            </div>
 
           </div>
         </div>
@@ -103,4 +198,14 @@ class CategoryPage extends Component {
   }
 }
 
-export default withRouter(CategoryPage);
+const mapStateToProps = () => {
+  return {}
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddedToCart: (id, categoryId) => dispatch(goodAddedToCart(id, categoryId))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryPage);

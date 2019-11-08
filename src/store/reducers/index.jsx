@@ -3,7 +3,7 @@ const initialState = {
   productsInCart: 0,
   loading: true,
   cartItems: [],
-  orderTotal: 220
+  orderTotal: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -38,20 +38,21 @@ const reducer = (state = initialState, action) => {
         ...state.goods[categoryId].slice(itemIndex + 1),
       ];
 
-      return {
+      const obj = {
         ...state,
-        // добавляем выбранный товар в state
         goods: {
           ...state.goods,
           [categoryId]: category
         },
-        // товары в корзине
         cartItems: [
           ...state.cartItems,
           newItem
         ],
-        ...state.productsInCart++
+        ...state.productsInCart++,
+        orderTotal: state.orderTotal + item.price
       };
+
+      return obj;
 
     default:
       return state;

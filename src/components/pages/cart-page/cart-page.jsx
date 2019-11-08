@@ -23,19 +23,11 @@ class CartPage extends Component {
 
     const renderRow = (item, index) => {
       const { id, title, price } = item;
-      // for (let key in items) {
-      //   console.log(key)
-      //   console.log(items[key])
-      // }
       return (
         <tr key={ id }>
           <td>{ index + 1 }</td>
           <td>{ title }</td>
-          <td>{  }</td>
           <td>{ price }</td>
-          <td>
-            -
-          </td>
         </tr>
       )
     };
@@ -49,9 +41,7 @@ class CartPage extends Component {
           <tr>
             <th>#</th>
             <th>Item</th>
-            <th>Count</th>
             <th>Price</th>
-            <th>Action</th>
           </tr>
           </thead>
 
